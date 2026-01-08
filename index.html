@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualmia | Incubating the Future</title>
+    <style>
+        :root {
+            --bg-color: #111111;
+            --text-color: #e0e0e0;
+            --accent-color: #3b82f6; /* Tech Blue */
+            --secondary-text: #a0a0a0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            padding: 4rem 0 2rem;
+            border-bottom: 1px solid #333;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            color: #fff;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            font-weight: 300;
+        }
+        .section-text {
+            color: var(--secondary-text);
+            margin-bottom: 1.5rem;
+        }
+        .bio-box {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-top: 1rem;
+        }
+        .bio-list {
+            list-style: none;
+            padding: 0;
+        }
+        .bio-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .bio-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: opacity 0.2s;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Qualmia.</h1>
+            <p class="subtitle">Incubating the Future of Digital Utility.</p>
+        </header>
+
+        <section>
+            <h2>We Build to Validate</h2>
+            <p class="section-text">
+                Qualmia is an Estonian technology lab dedicated to building, validating, and scaling high-impact digital solutions. 
+                We operate at the intersection of emerging technology and practical market needs. 
+            </p>
+            <p class="section-text">
+                We don't just write code; we build ventures. From simple MVPs to complex ecosystems, our goal is to turn experimental 
+                concepts in AI, Geolocation, and Blockchain into tangible products that solve real-world problems.
+            </p>
+        </section>
+
+        <section>
+            <h2>Meet the Architect</h2>
+            <div class="bio-box">
+                <p><strong>Bálint Szabó</strong> is a seasoned executive with over two decades of experience navigating the global technology landscape. 
+                With a career spanning from Budapest to Rio de Janeiro, Bálint has a proven track record of scaling businesses in diverse sectors—from 
+                [cite_start]Industrial IoT and Fintech to Digital Media and Security[cite: 4, 6, 14, 36].</p>
+                
+                <p>His background is defined by growth:</p>
+                <ul class="bio-list">
+                    [cite_start]<li><strong>International Scale:</strong> Taking complex hardware and IoT solutions from zero to €1.5M in new markets[cite: 7].</li>
+                    [cite_start]<li><strong>Mass Adoption:</strong> Leading growth strategies that scaled platforms to 16 million monthly users[cite: 16].</li>
+                    [cite_start]<li><strong>Strategic Agility:</strong> Advising government partners on market entry and navigating cross-cultural business landscapes[cite: 11, 12].</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+                
+                <p style="font-style: italic;">
+                    "I founded Qualmia to be the engine room for the next generation of digital products. I am currently recruiting volunteer experts to work on exciting projects involving AI, blockchain technologies, and mobile applications."
+                </p>
+                
+                <a href="mailto:balint@qualmia.com" class="cta-button">Join the Lab</a>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Qualmia OÜ</strong><br>
+            Vindi 8, 11315 Tallinn, Estonia<br>
+            Registry Code: 1467 7901 | VAT: EE102442058</p>
+            
+            <p>
+                Email: <a href="mailto:balint@qualmia.com" style="color:#888;">balint@qualmia.com</a><br>
+                Phone: +36 70 360 5638
+            </p>
+
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <span>&copy; 2024 Qualmia OÜ</span>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
