@@ -5,80 +5,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Qualmia</title>
     <style>
-        /* Simple, modern CSS reset and styles */
+        :root {
+            --bg-color: #111111;
+            --text-color: #e0e0e0;
+            --accent-color: #3b82f6; /* Tech Blue */
+            --secondary-text: #a0a0a0;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f9fafb; /* Light grey background */
-            color: #1f2937;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
-
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
         header {
-            background-color: #ffffff;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            text-align: center;
+            padding: 2rem 0 2rem;
+            border-bottom: 1px solid #333;
         }
-
-        nav a {
-            text-decoration: none;
-            color: #6b21a8; /* Deep purple */
-            font-weight: 600;
-            margin: 0 15px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
         h1 {
-            color: #111827;
-            margin-bottom: 8px;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
-
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            color: #fff;
+        }
         .subtitle {
-            color: #6b7280;
-            margin-bottom: 32px;
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            font-weight: 300;
         }
-
-        .detail-item {
-            margin-bottom: 24px;
-            font-size: 1.1rem;
+        .section-text {
+            color: var(--secondary-text);
+            margin-bottom: 1.5rem;
         }
-
-        .label {
-            display: block;
+        .contact-box {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-top: 1rem;
+        }
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        .contact-label {
             font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #9ca3af;
-            margin-bottom: 4px;
+            color: var(--secondary-text);
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
+        .contact-value {
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+        .contact-value a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .contact-value a:hover {
+            opacity: 0.8;
+        }
+        footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        nav {
+            padding: 2rem 0 1rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-menu li {
+            margin: 0;
+        }
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+        }
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        .nav-menu a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body>
 
-        .value {
-            color: #374151;
-            font-weight:
+    <div class="container">
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">About Us</a></li>
+                <li><a href="ga-assistant.html">GA Assistant</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>Contact Us</h1>
+            <p class="subtitle">Get in touch with Qualmia OÜ</p>
+        </header>
+
+        <section>
+            <div class="contact-box">
+                <div class="contact-item">
+                    <div class="contact-label">Company</div>
+                    <div class="contact-value">Qualmia OÜ</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Address</div>
+                    <div class="contact-value">Vindi 8, 11315 Tallinn, Estonia</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Registry Code</div>
+                    <div class="contact-value">1467 7901</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">VAT</div>
+                    <div class="contact-value">EE102442058</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Telephone</div>
+                    <div class="contact-value"><a href="tel:+36703605638">+36703605638</a></div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value"><a href="mailto:balint@qualmia.com">balint@qualmia.com</a></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <span>&copy; 2024 Qualmia OÜ</span>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
