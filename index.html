@@ -25,7 +25,7 @@
             padding: 2rem;
         }
         header {
-            padding: 4rem 0 2rem;
+            padding: 2rem 0 2rem;
             border-bottom: 1px solid #333;
         }
         h1 {
@@ -99,11 +99,50 @@
         .footer-links a:hover {
             color: var(--accent-color);
         }
+        nav {
+            padding: 2rem 0 1rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-menu li {
+            margin: 0;
+        }
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+        }
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        .nav-menu a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">About Us</a></li>
+                <li><a href="ga-assistant.html">GA Assistant</a></li>
+                <li><a href="geo-llm.html">GEO & LLM Visibility Services</a></li>
+            </ul>
+        </nav>
+
         <header>
             <h1>Qualmia OÜ — Technology Validation Lab</h1>
         </header>
