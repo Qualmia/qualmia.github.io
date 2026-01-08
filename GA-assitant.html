@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="G.Ai Analyst turns GA4 data into decisions. Connect your GA4 property and ask questions in natural language." />
+  <title>GA Assistant • G.Ai Analyst</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#101a33;
+      --text:#e9eefc;
+      --muted:#b7c3e6;
+      --line:rgba(255,255,255,.12);
+      --accent:#7c5cff;
+      --accent2:#2dd4bf;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 15%, rgba(124,92,255,.22), transparent 55%),
+        radial-gradient(700px 450px at 85% 25%, rgba(45,212,191,.18), transparent 60%),
+        radial-gradient(900px 600px at 55% 95%, rgba(124,92,255,.12), transparent 65%),
+        var(--bg);
+      line-height:1.5;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 72px;}
+
+    /* Top nav */
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:12px 0 22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(124,92,255,.25);
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:9px 10px 11px 10px;
+      border:2px solid rgba(255,255,255,.65);
+      border-left-color: transparent;
+      border-radius: 999px;
+      transform: rotate(-20deg);
+    }
+    .brand strong{font-weight:700; letter-spacing:.2px}
+    .brand span{display:block; color:var(--muted); font-size:13px; margin-top:2px}
+
+    .navlinks{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .navlinks a{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:12px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{border-color:var(--line); color:var(--text); background:rgba(255,255,255,.03)}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:12px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      box-shadow: none;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      border-color: rgba(124,92,255,.55);
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(45,212,191,.75));
+      box-shadow: 0 18px 45px rgba(124,92,255,.18);
+    }
+    .btn.primary:hover{border-color: rgba(124,92,255,.9)}
+    .btn .dot{
+      width:8px; height:8px; border-radius:999px; background:rgba(255,255,255,.85)
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:24px;
+      align-items:stretch;
+      padding:22px 0 10px;
+    }
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr; }
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:14px;
+      width:fit-content;
+    }
+    .badge b{color:var(--text); font-weight:650}
+    .badge .pill{
+      padding:3px 10px; border-radius:999px;
+      background: rgba(45,212,191,.15);
+      border:1px solid rgba(45,212,191,.25);
+      color: #bff7ee;
+      font-weight:650;
+      font-size:12px;
+    }
+
+    h1{
+      margin:0;
+      font-size:44px;
+      line-height:1.12;
+      letter-spacing:-.6px;
+    }
+    @media (max-width: 520px){
+      h1{font-size:36px}
+    }
+    .lead{
+      margin:14px 0 18px;
+      font-size:18px;
+      color:var(--muted);
+      max-width: 62ch;
+    }
+
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+
+    /* Side panel */
+    .panel{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+    }
+    .panel h3{margin:0 0 10px; font-size:15px; color:var(--muted); font-weight:650; letter-spacing:.2px}
+    .panel .q{
+      display:flex; flex-direction:column; gap:10px;
+      padding:14px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.09);
+      background: rgba(11,16,32,.55);
+      margin-bottom:12px;
+    }
+    .panel .q code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:13px;
+      color:#dbe6ff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .panel .q span{color:var(--muted); font-size:13px}
+
+    /* Sections */
+    .section{
+      margin-top: 28px;
+      padding-top: 10px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-size:22px;
+      letter-spacing:-.2px;
+    }
+    .section p{margin:0 0 14px; color:var(--muted); max-width: 80ch}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 560px){ .grid{grid-template-columns: 1fr;} }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding:16px;
+    }
+    .card h3{margin:0 0 6px; font-size:15px}
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .icon{
+      width:34px; height:34px; border-radius:12px;
+      background: rgba(124,92,255,.12);
+      border:1px solid rgba(124,92,255,.22);
+      display:grid; place-items:center;
+      margin-bottom:10px;
+    }
+
+    /* Steps */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .steps{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 560px){ .steps{grid-template-columns: 1fr;} }
+
+    .step{
+      position:relative;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding:16px 16px 14px;
+      overflow:hidden;
+    }
+    .step .num{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:30px; height:30px; border-radius:999px;
+      background: rgba(45,212,191,.14);
+      border:1px solid rgba(45,212,191,.25);
+      color:#c9fff7;
+      font-weight:750;
+      margin-bottom:10px;
+      font-size:13px;
+    }
+    .step h3{margin:0 0 6px; font-size:15px}
+    .step p{margin:0; color:var(--muted); font-size:14px}
+
+    /* Examples */
+    .examples{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){ .examples{grid-template-columns:1fr;} }
+
+    ul{margin:0; padding-left: 18px; color:var(--muted)}
+    li{margin:8px 0}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+      padding:14px 14px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      font-weight:650;
+      color:var(--text);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted); font-size:14px}
+
+    /* Footer */
+    footer{
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    footer a{color:var(--muted); text-decoration:none}
+    footer a:hover{color:var(--text)}
+    .small{font-size:12px; opacity:.95}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="nav" aria-label="Top navigation">
+      <a class="brand" href="/" aria-label="Qualmia home">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Qualmia</strong>
+          <span>GA Assistant • G.Ai Analyst</span>
+        </div>
+      </a>
+      <nav class="navlinks" aria-label="Page links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#examples">Examples</a>
+        <a href="#faq">FAQ</a>
+        <!-- Replace with your real links -->
+        <a class="btn" href="/privacy-policy"><span class="dot"></span> Privacy Policy</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Hero">
+        <div>
+          <div class="badge">
+            <span class="pill">Google Analytics 4</span>
+            <span>•</span>
+            <b>AI Assistant</b>
+          </div>
+
+          <h1>G.Ai Analyst turns GA4 data into decisions.</h1>
+          <p class="lead">
+            Connect your GA4 property, describe your business and goals, and ask questions in natural language.
+            G.Ai Analyst pulls the right metrics, interprets them with marketing logic, and gives clear next steps —
+            without drowning you in dashboards.
+          </p>
+
+          <div class="cta-row">
+            <!-- Replace the href targets with your real destination -->
+            <a class="btn primary" href="/request-access">Request access</a>
+            <a class="btn" href="#how-it-works">See how it works</a>
+          </div>
+
+          <div class="section" style="margin-top:22px; padding-top:0;">
+            <h2 style="font-size:18px; margin-bottom:10px;">Ask like a human</h2>
+            <p style="margin-bottom:0;">
+              “Where are visitors coming from?” “Which channels work best?” “Why is conversion low?”
+            </p>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Example Q&A">
+          <h3>Example questions</h3>
+          <div class="q">
+            <code>Where did my traffic come from in the last 30 days?</code>
+            <span>Channels, sources, and the “why” behind the change.</span>
+          </div>
+          <div class="q">
+            <code>Which channel brings engaged users, not just clicks?</code>
+            <span>Engagement quality, not vanity metrics.</span>
+          </div>
+          <div class="q">
+            <code>Why are conversions low despite high sessions?</code>
+            <span>Funnel clues: pages, devices, speed, and intent mismatch.</span>
+          </div>
+          <div class="q" style="margin-bottom:0;">
+            <code>Is mobile performance hurting revenue?</code>
+            <span>Device split, UX friction points, and actions to fix.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" aria-label="Value propositions">
+        <div class="grid">
+          <div class="card">
+            <div class="icon" aria-hidden="true">🧠</div>
+            <h3>Real GA4 interpretation</h3>
+            <p>Not charts. Not noise. You get meaning: what changed, why it matters, what to do next.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true">✅</div>
+            <h3>Actionable recommendations</h3>
+            <p>Each answer includes practical steps you can apply immediately to improve performance.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true">🎯</div>
+            <h3>Built for founders &amp; marketers</h3>
+            <p>Analytics that guide strategy — not just report history.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true">🔒</div>
+            <h3>Read-only access</h3>
+            <p>You grant read-only access to your GA4 property so the assistant can query metrics and dimensions.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section" aria-label="How it works">
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Connect GA4</h3>
+            <p>You grant read-only access to your GA4 property.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Add context</h3>
+            <p>Describe your business model, goals, and key conversions.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Ask questions</h3>
+            <p>Natural language → relevant metrics → interpretation → next steps.</p>
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <h3>Act</h3>
+            <p>Recommendations map to channels, pages, devices, and funnels.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples" class="section" aria-label="Examples of questions">
+        <h2>Examples of questions</h2>
+        <div class="examples">
+          <div class="card">
+            <h3 style="margin-top:0;">Questions people actually ask</h3>
+            <ul>
+              <li>Where is my best traffic coming from, and why?</li>
+              <li>Which channel brings engaged users, not just clicks?</li>
+              <li>Why are conversions low despite high sessions?</li>
+              <li>Is mobile performance hurting revenue?</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0;">What you get back</h3>
+            <p>
+              A concise explanation of what changed, what likely caused it, and the next actions to test — grounded in GA4 metrics.
+            </p>
+            <div style="height:10px"></div>
+            <a class="btn primary" href="/request-access">Request access</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-label="FAQ">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Do you store my GA4 data?</summary>
+          <p>
+            By default, the app should only access what’s needed to answer your question.
+            Implementation details may evolve; see the Privacy Policy for the current approach.
+          </p>
+        </details>
+
+        <details>
+          <summary>What access do you need?</summary>
+          <p>
+            Read-only access to your GA4 property (so the assistant can query metrics and dimensions).
+          </p>
+        </details>
+
+        <details>
+          <summary>Is this an official Google product?</summary>
+          <p>
+            No. G.Ai Analyst is an independent tool built to work with Google Analytics 4.
+          </p>
+        </details>
+      </section>
+
+      <footer aria-label="Footer">
+        <div>
+          <div><strong>Qualmia OÜ</strong> • GA Assistant / G.Ai Analyst</div>
+          <div class="small">Turning analytics questions into decisions.</div>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <!-- Replace with your real links -->
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
