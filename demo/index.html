@@ -4,25 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Qualmia Demo</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    main { max-width: 960px; margin: 4rem auto; padding: 0 1rem; }
+    h1 { margin: 0 0 0.5rem; }
+    p { margin: 0 0 1.5rem; line-height: 1.5; }
+    .video { margin-top: 2rem; }
+    .video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; }
+    .fallback { margin-top: 0.75rem; font-size: 0.95rem; opacity: 0.8; }
+  </style>
 </head>
 <body>
-
-  <main style="max-width: 960px; margin: 4rem auto; padding: 0 1rem;">
+  <main>
     <h1>Qualmia Demo</h1>
-  <p>This is the Qualmia product demo.</p>
+    <p>This is the Qualmia product demo.</p>
 
-<div style="margin-top: 2rem;">
-  <iframe
-    src="https://customer-08dk6n1rgnue6qhj.cloudflarestream.com/b7c6d9b0ea7b47d1719fb1d0dbc7f5e2/iframe"
-    style="border:0; width:100%; aspect-ratio:16/9;"
-    loading="lazy"
-    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-    allowfullscreen
-  ></iframe>
-</div>
+    <div class="video">
+      <iframe
+        src="https://customer-08dk6n1rgnue6qhj.cloudflarestream.com/b7c6d9b0ea7b47d1719fb1d0dbc7f5e2/iframe"
+        loading="lazy"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen
+      ></iframe>
 
+      <div class="fallback">
+        If the video doesn’t load, open it directly:
+        <a href="https://customer-08dk6n1rgnue6qhj.cloudflarestream.com/b7c6d9b0ea7b47d1719fb1d0dbc7f5e2/iframe" target="_blank" rel="noopener">
+          demo player
+        </a>
+      </div>
+    </div>
   </main>
-
 </body>
 </html>
+
 
